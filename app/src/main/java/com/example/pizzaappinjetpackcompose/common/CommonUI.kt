@@ -26,8 +26,8 @@ fun AppIconButton(
     onClick: () -> Unit = {}
 ) {
     IconButton(
-        onClick = { onClick },
-        modifier = modifier.size(28.dp)
+        onClick = { onClick() },
+        modifier = modifier.size(28.dp)     // Size of the icon
     ) {
         Icon(
             painter = painterResource(id = icon),

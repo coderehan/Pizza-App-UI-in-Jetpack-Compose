@@ -73,6 +73,8 @@ fun HomeScreen() {
             "Indian",
             "Italian"
         )
+
+    // Here we specified "Starter" is the current chip selector
     var currentChipMenuState by remember {
         mutableStateOf("Starter")
     }
@@ -93,7 +95,7 @@ fun HomeScreen() {
             // This is for chips selection
             Card(
                 modifier = Modifier
-                    .fillMaxWidth(),
+                    .fillMaxWidth(),     // It is taking entire width
                 colors = CardDefaults.cardColors(
                     containerColor = Color.White
                 )
@@ -101,7 +103,7 @@ fun HomeScreen() {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .horizontalScroll(scrollState)
+                        .horizontalScroll(scrollState)  // Row will be horizontally scrollable
                 ) {
                     chipMenuList.forEach {
                         CustomChip(
@@ -114,7 +116,7 @@ fun HomeScreen() {
                 }
             }
             // This is for showing pizza data in gridview
-            LazyVerticalGrid(columns = GridCells.Fixed(2)) {
+            LazyVerticalGrid(columns = GridCells.Fixed(2)) {    // 2 content will be shown in single row
                 // We will show list of pizza
                 items(pizzaList) {
                     ShowPizza(pizzaData = it)
@@ -136,16 +138,16 @@ fun HomeScreen() {
 fun PizzaHeader() {
     Box(
         modifier = Modifier
-            .fillMaxWidth()
+            .fillMaxWidth()     // It will take entire width
             .background(color = OrangeColor)
     ) {
         Row(
             modifier = Modifier
-                .fillMaxWidth()
+                .fillMaxWidth()     // It will take entire width
                 .padding(
-                    vertical = 20.dp,
+                    vertical = 20.dp,        // Vertical means top & bottom is 20dp and horizontal means start & end is 10dp
                     horizontal = 10.dp
-                ),      // Vertical means top & bottom is 20dp and horizontal means start & end is 10dp
+                ),
             horizontalArrangement = Arrangement.SpaceBetween        // Maximum space will be shared between these 2 row items
         ) {       // Row start
             Row {  // Row start
@@ -173,7 +175,7 @@ fun PizzaHeader() {
 fun CustomChip(
     title: String,      // In chip, we have title inside it
     selected: Boolean,   // This is for selecting particular chip among chips
-    onValueChange: (String) -> Unit
+    onValueChange: (String) -> Unit     // Here we are defining string because we are updating title of chip when user select particular chip
 ) {
     // We will use TextButton composable for designing chips
     TextButton(
@@ -184,11 +186,12 @@ fun CustomChip(
         colors = ButtonDefaults.buttonColors(
             containerColor = if (selected) YellowColor else Color.Transparent       // container color is the background color of button
         ),
-        border = BorderStroke(2.dp, color = YellowColor),
+        border = BorderStroke(1.dp, color = YellowColor),
         modifier = Modifier.padding(vertical = 15.dp, horizontal = 10.dp)
     ) {
         Text(
-            text = title, style = TextStyle(
+            text = title,
+            style = TextStyle(
                 fontSize = 14.sp,
                 fontWeight = FontWeight.W600,
                 color = if (selected) Color.White else DarkBlackColor     // If we click on particular chip, text color will show in described white color and other chips text color will be in DarkBlackColor
@@ -203,22 +206,19 @@ fun ShowPizza(
 ) {
     Card(
         modifier = Modifier
-            .padding(4.dp),
-        shape = RoundedCornerShape(5.dp),
+            .padding(vertical = 3.dp, horizontal = 4.dp),
+        shape = RoundedCornerShape(25.dp),
         colors = CardDefaults.cardColors(
             containerColor = Color.White
         )
     ) {
         // Box is used as we have to center image & text inside card
         Box(
-            modifier = Modifier
-                .fillMaxWidth(),
             contentAlignment = Alignment.Center
         ) {
             Column(
                 modifier = Modifier
-                    .padding(5.dp)
-                    .fillMaxWidth(),
+                    .padding(5.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Image(
@@ -258,8 +258,8 @@ fun ShowPizza(
                 SpacerHeight()
                 Button(
                     onClick = { },
-                    modifier = Modifier.width(90.dp),
-                    shape = RoundedCornerShape(18.dp),
+                    modifier = Modifier.width(150.dp),
+                    shape = RoundedCornerShape(50.dp),
                     colors = ButtonDefaults.buttonColors(
                         containerColor = YellowColor
                     )
@@ -288,6 +288,8 @@ fun FloatingActionButton(modifier: Modifier) {
             .clip(RoundedCornerShape(27.dp))
             .background(DarkBlackColor)
     ) {
+        // Inside this box, we will show two things 1. button 2. image icon
+        // So we will use row to achieve this.
         Row {
             SpacerWidth(20.dp)
             Text(
