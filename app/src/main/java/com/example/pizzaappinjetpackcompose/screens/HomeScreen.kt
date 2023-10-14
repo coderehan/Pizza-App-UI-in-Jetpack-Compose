@@ -86,7 +86,7 @@ fun HomeScreen() {
     // We will keep all ui components inside Box.
     Box(
         modifier = Modifier
-            .fillMaxSize()                      // It includes both width and height
+            .fillMaxSize()                      // It will take both entire screen width and entire screen height
             .background(color = LightGrayColor)        // This is the color of activity screen
     ) {
         Column {
